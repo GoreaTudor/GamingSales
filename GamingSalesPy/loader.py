@@ -16,3 +16,5 @@ if __name__ == '__main__':
 
 # TODO (when presenting):
 #  0. SAY UR NAME
+#  1. upload to sql db
+#  2. connect to db, use env file for secrets
