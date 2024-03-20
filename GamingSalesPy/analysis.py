@@ -1,7 +1,8 @@
-import pandas as pd
+from repository import Repository
 
 if __name__ == '__main__':
-    raw_data = pd.read_csv('.\\data\\vgsales.csv')
+    repo = Repository()
+    raw_data = repo.get_all_sales()
 
     print("\nHow data looks in table:")
     print(raw_data.head())
