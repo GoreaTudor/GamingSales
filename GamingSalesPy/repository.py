@@ -10,21 +10,24 @@ class Repository:
     def get_all_sales(self):
         return self._db
 
-    def get_unique_count(self, key, ascending=False):
+    def select_distinct(self, key, ascending=False):
         return (self._db
                 .drop_duplicates([key])
                 .sort_values(by=key, ascending=ascending)[key]
                 .count())
 
-    def get_group_sum(self, x_axis, y_axis):
+    def group_by_sum(self, x_axis, y_axis):
         return (self._db
                 .groupby(x_axis)
                 .sum()
                 .reset_index()
                 .sort_values(by=y_axis, ascending=False))
 
-    def get_filtered_sum(self):
-        return (self._db)
+    def group_by_count(self, x_axis, y_axis):
+        return (self._db
+                .groupby(x_axis)
+                [y_axis]
+                .agg(lambda x: x.value_counts().idxmax()))
 
 
 if __name__ == '__main__':
