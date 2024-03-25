@@ -69,3 +69,12 @@ class Repository:
                 .groupby(x_axis)
                 [y_axis]
                 .agg(lambda x: x.value_counts().idxmax()))
+
+    # SELECT SUM(Global_Sales)
+    # FROM vgsales
+    # GROUP BY Year
+    def time_series(self):
+        return (self._db
+                .groupby(YEAR)
+                [GLOBAL_SALES]
+                .sum())

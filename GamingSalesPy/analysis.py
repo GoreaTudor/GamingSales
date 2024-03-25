@@ -125,7 +125,21 @@ def run_specific_queries(games_by_platforms, games_by_genre):
         print(p_bethesda[PUBLISHER])
 
 
-def runner(setup, counts, sales_correlations, games_correlations, label_correlations, specific_queries):
+def run_time_series():
+    # Predict Global Sales based on Year.
+    result = repo.time_series()
+
+    plt.figure(figsize=(12, 6))
+    result.plot(kind='line', color='skyblue')
+    plt.title('Global Sales of Video Games Over Time')
+    plt.xlabel('Year')
+    plt.ylabel('Global Sales (millions)')
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+def runner(setup, counts, sales_correlations, games_correlations, label_correlations, specific_queries, time_series):
     if setup:
         run_setup()
 
@@ -178,6 +192,8 @@ def runner(setup, counts, sales_correlations, games_correlations, label_correlat
         run_specific_queries(games_by_platforms=True,
                              games_by_genre=True,
                              )
+    if time_series:
+        run_time_series()
 
 
 if __name__ == '__main__':
@@ -186,7 +202,8 @@ if __name__ == '__main__':
         setup=False,
         counts=False,
         sales_correlations=False,
-        games_correlations=True,
+        games_correlations=False,
         label_correlations=False,
         specific_queries=False,
+        time_series=False,
     )
