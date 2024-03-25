@@ -29,9 +29,14 @@ if __name__ == '__main__':
     print(proj.groupby([PLATFORM]).size())
     print(">>> PC", proj.groupby([PLATFORM]).size()['PC'])
 
-    # TESTING QUERIES:
+    ####################
+    # TESTING QUERIES: #
+    ####################
 
     print("\n\nBethesda's Unique Game Launches")
+    # SELECT DISTINCT Name, Publisher
+    # FROM vgsales
+    # WHERE Publisher = 'Bethesda Softworks'
     uq = sales.drop_duplicates([NAME])
-    uq_filtered = uq.loc[uq[PUBLISHER] == 'Bethesda Softworks']
+    uq_filtered = uq.loc[uq[PUBLISHER] == BETHESDA]
     print(uq_filtered[[NAME, PUBLISHER]])

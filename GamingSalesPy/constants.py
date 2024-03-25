@@ -13,3 +13,9 @@ EU_SALES = 'EU_Sales'
 JP_SALES = 'JP_Sales'
 OTHER_SALES = 'Other_Sales'
 GLOBAL_SALES = 'Global_Sales'
+
+# Other
+NR_OF_GAMES = 'Nr_of_Games'
+BETHESDA = 'Bethesda Softworks'
+RANGE_MIN = 2006
+RANGE_MAX = 2012
