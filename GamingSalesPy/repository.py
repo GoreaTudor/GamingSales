@@ -1,6 +1,6 @@
-from constants import *
-
 import pandas as pd
+
+from constants import *
 
 
 class Repository:
