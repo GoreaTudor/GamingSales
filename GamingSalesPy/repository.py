@@ -18,13 +18,15 @@ class Repository:
     def select_distinct(self, key, ascending=False):
         return (self._db
                 .drop_duplicates([key])
-                .sort_values(by=key, ascending=ascending)[key]
+                .sort_values(by=key, ascending=ascending)
+                [key]
                 .count())
 
     # SELECT COUNT(:y_axis) as Nr_of_Games
     # FROM vgsales
+    # (WHERE Year BETWEEN :min AND :max)  -  OPTIONAL
     # GROUP BY :x_axis
-    # ORDER BY :y_axis
+    # ORDER BY Nr_of_Games
     def group_by_count(self, x_axis, y_axis, should_filter=False):
         init = self._db
 
@@ -78,3 +80,7 @@ class Repository:
                 .groupby(YEAR)
                 [GLOBAL_SALES]
                 .sum())
+
+
+# TODO:
+#  find difference between: count(), value_counts() and size()

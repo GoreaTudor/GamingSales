@@ -203,7 +203,7 @@ if __name__ == '__main__':
         counts=False,
         sales_correlations=False,
         games_correlations=False,
-        label_correlations=False,
+        label_correlations=True,
         specific_queries=False,
         time_series=False,
     )
