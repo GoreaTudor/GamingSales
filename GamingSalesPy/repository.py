@@ -81,6 +81,21 @@ class Repository:
                 [GLOBAL_SALES]
                 .sum())
 
+    # SELECT SUM(Global_Sales)
+    # FROM vgsales
+    # WHERE Publisher = :Publisher
+    # GROUP BY Year
+    # ORDER BY Year
+    def rolling_data(self, publisher):
+        filtered = self._db.loc[self._db[PUBLISHER] == publisher]
+
+        return (filtered
+                .groupby(YEAR)
+                [GLOBAL_SALES]
+                .sum()
+                .reset_index()
+                .sort_values(by=YEAR, ascending=True))
+
 
 # TODO:
 #  find difference between: count(), value_counts() and size()

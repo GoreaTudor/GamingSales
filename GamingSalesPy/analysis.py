@@ -185,7 +185,10 @@ def run_specific_queries(games_by_platforms, games_by_genre):
 
 def run_time_series():
     # Predict Global Sales based on Year.
+    start = timer()
     result = repo.time_series()
+    stop = timer()
+    print("Time Elapsed:", stop - start)
 
     plt.figure(figsize=(12, 6))
     result.plot(kind='line', color='skyblue')
@@ -197,7 +200,19 @@ def run_time_series():
     plt.show()
 
 
-def runner(setup, counts, sales_correlations, games_correlations, label_correlations, specific_queries, time_series):
+def run_rolling():
+    # Rolling mean on yearly Global Sales, for Bethesda
+    init = repo.rolling_data(BETHESDA)
+    start = timer()
+    result = init.rolling(2).mean()
+    stop = timer()
+
+    print_plot(result, YEAR, GLOBAL_SALES)
+    print("Time Elapsed:", stop - start)
+
+
+def runner(setup, counts, sales_correlations, games_correlations, label_correlations, specific_queries, time_series,
+           rolling):
     if setup:
         run_setup()
 
@@ -253,6 +268,9 @@ def runner(setup, counts, sales_correlations, games_correlations, label_correlat
     if time_series:
         run_time_series()
 
+    if rolling:
+        run_rolling()
+
 
 if __name__ == '__main__':
     repo = Repository()
@@ -261,9 +279,10 @@ if __name__ == '__main__':
         counts=False,
         sales_correlations=False,
         games_correlations=False,
-        label_correlations=True,
+        label_correlations=False,
         specific_queries=False,
         time_series=False,
+        rolling=False,
     )
 
 # Dask Not Working...
